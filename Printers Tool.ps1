@@ -29,12 +29,11 @@ $printer_form.Controls.Add($Printer_label)
 
 $Computer_bar = New-Object System.Windows.Forms.TextBox
 $Computer_bar.Location = New-Object System.Drawing.Size(5,28)
-$Computer_bar.Size = New-Object System.Drawing.Size(400,21)
+$Computer_bar.Size = New-Object System.Drawing.Size(500,21)
 $Computer_bar.Text = $ComputerName
-$Computer_bar.Focused = $true
 
 $Computer_button = New-Object System.Windows.Forms.Button
-$Computer_button.Location = New-Object System.Drawing.Point(408,26)
+$Computer_button.Location = New-Object System.Drawing.Point(508,26)
 $Computer_button.Size = New-Object System.Drawing.Size(21,21)
 $Computer_button.BackgroundImage = $image
 $Computer_button.BackgroundImageLayout = 'Zoom'
@@ -57,6 +56,7 @@ $get_printers = {
         $printer_form.Enabled = $false
         $Printer_Box.Items.Add("Processing . . .")
         If (Test-Connection $ComputerName -Count 1 -quiet) {
+            $PrintScriptPrinters = @()
             $printer_form.AcceptButton = $confirm_button
             #Collect a list of all User accounts and searches the registry for the printers of the currently loogged-on User by their SID.
             $UsersList = Get-ChildItem -Path \\$ComputerName\c$\Users\ -Name -Exclude ("Public", "WMISAdmin", "altiris","DiscoWinServer","DiscoWinClient")
@@ -100,9 +100,14 @@ $get_printers = {
             }else{
                 #Setup $printscript to be formatted as the .vbs print script file.
                 $Printer_Box.Items.Clear()
-                $Printer_Box.Items.Add($PrintScriptPrinters)
+                If ($PrintScriptPrinters.Count -gt 1) {
+                    foreach ($add_printer in $PrintScriptPrinters) {
+                        $Printer_Box.Items.Add($add_printer)
+                    }
+                }else{
+                    $Printer_Box.Items.Add($PrintScriptPrinters)
+                }
                 If ($DftPtr -like '*\*') {
-                    $Printer_Box.Items.ForeColor = "Green"
                     $Printer_Box.Items.Add($DftPtr)
                 }
             }
@@ -120,9 +125,10 @@ $printer_form.Controls.Add($Computer_button)
 $Printer_Box = New-Object System.Windows.Forms.ListBox
 $Printer_Box.Location = New-Object System.Drawing.Point(5,91)
 $Printer_Box.AutoSize = $true
-$Printer_Box.MinimumSize = New-Object System.Drawing.Size(422,300)
+$Printer_Box.MinimumSize = New-Object System.Drawing.Size(522,300)
 $Printer_Box.MaximumSize = New-Object System.Drawing.Size(0,300)
 $Printer_Box.ScrollAlwaysVisible = $true
+$Printer_Box.HorizontalScrollBar = $true
 $Printer_Box.Items.Clear()
 
 $printer_remove = {
@@ -138,7 +144,7 @@ $Printer_Box.add_Click($printer_remove)
 $printer_form.Controls.Add($Printer_Box)
 
 $confirm_button = New-Object System.Windows.Forms.Button
-$confirm_button.Location = New-Object System.Drawing.Point(270,390)
+$confirm_button.Location = New-Object System.Drawing.Point(370,390)
 $confirm_button.Size = New-Object System.Drawing.Size(75,23)
 $confirm_button.Text = 'Confirm'
 
@@ -161,7 +167,7 @@ $confirm_button.add_click($confirm)
 $printer_form.Controls.Add($confirm_button)
 
 $end_button = New-Object System.Windows.Forms.Button
-$end_button.Location = New-Object System.Drawing.Point(350,390)
+$end_button.Location = New-Object System.Drawing.Point(450,390)
 $end_button.Size = New-Object System.Drawing.Size(75,23)
 $end_button.Text = 'Exit'
 $end_button.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
