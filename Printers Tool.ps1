@@ -149,6 +149,7 @@ $confirm_button.Size = New-Object System.Drawing.Size(75,23)
 $confirm_button.Text = 'Confirm'
 
 $confirm = {
+    $ComputerName = $Computer_bar.Text
     $ChosenPrinters = $Printer_Box.Items
     $printscript = $printscript_header + $ChosenPrinters
     $printscript | Out-File -FilePath "$Print_Script_Path\$ComputerName.vbs"
