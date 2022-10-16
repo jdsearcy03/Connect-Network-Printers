@@ -70,63 +70,60 @@
         <div class="section projects">
           <h2 class="section__title">Query Computer Name</h2>
           <p class="description">
-            In order for the application to run, you need to provide three pieces of information: Computer Name(s), App Name(s), and whether you want to Install or Uninstall.
+            To run the application, you need to enter the name of a Computer that is online.
           </p>
           <p class="description about__role">
-            To add a Computer that you want to install an application onto, enter its name into the search bar and click on the down arrow.
+            If you do not enter a Computer Name or if the Computer is not connected to your network, you will receive an error.
           </p>
           <p class="description about__role">
-            This will add the Computer Name to the list in the box below the search bar.
+            Otherwise, the process will initialize.
           </p>
           <p class="description about__role">
-            You can add as many Computer Names to this list as you like.
+            (Depending on the number of Users, this process could take several moments)
           </p>
           <p class="about__role" align="center">
-            <img src='https://github.com/jdsearcy03/Application-Installer/blob/main/ReadMe%20Files/ComputerName.gif?raw="true"' class="image" alt="Add Computers">
+            <img src='https://github.com/jdsearcy03/Connect-Network-Printers/blob/main/ReadMe%20Files/Computer.gif?raw="true"' class="image" alt="Add Computers">
           </p>          
         </div>
       </section>
 
           <!-- Edit -->
           <section class="section skills" id="skills">
-              <h2 class="section__title">Add Applications</h2>
+              <h2 class="section__title">Check Printer List</h2>
               <p class="description">
-                Use the search bar in the top right side of the window to query SCCM for available applications.
+                Once the process is complete, each connected printer will be added as a separate line item in the Print Script box.
               </p>
               <p class="description about__role">
-                Enter an application name, part of a name, or series of characters to query SCCM.
+                If you see any printers that you don't want in the list, just click on them.
               </p>
               <p class="description about__role">
-                Once you find an application that you want to install, simply select that application from the list to highlight it.
+                If you click on a printer, you will be prompted to confirm that you want to remove that printer from the list.
               </p>
               <p class="description about__role">
-                Next, select a Computer from the list you previously created.
-              </p>
-              <p class="description about__role">
-                Finally, select either "Install" or "Uninstall" to initialize the operation.
-              </p>
-              <p class="description about__role">
-                Both the selected Computer and App remain highlighted after making your selection so that you can easily install the same application on multiple computers or install multiple applications on the same computer.
+                Once you are happy with the printer list, click the Confirm Button.
               </p>
               <p class="about__role" align="center">
-                <img src='https://github.com/jdsearcy03/Application-Installer/blob/main/ReadMe%20Files/Application.gif?raw="true"' class="image" alt="Add Applications">
+                <img src='https://github.com/jdsearcy03/Connect-Network-Printers/blob/main/ReadMe%20Files/Printers.gif?raw="true"' class="image" alt="Add Applications">
               </p>
           </section>
 
       <!-- End -->
       <section class="section contact center" id="contact">
-        <h2 class="section__title">Check Installation Status</h2>
+        <h2 class="section__title">Save Print Script</h2>
         <p class="description">
-          The bottom window displays a running list of actions that have been performed.
+          When you click the Confirm button, the print script is automatically saved in a Files folder under the same directory that the script is in.
         </p>
         <p class="description about__role">
-          Clicking on an entry will display the current installation status of that application on the specified computer.
+          (This can easily be changed to any location.)
         </p>
         <p class="description about__role">
-          Once the installation status changes, the line item also updates to reflect that the process has completed.
+          Finally, you are prompted with the option to save the print script to the startup folder of the target Computer.
+        </p>
+        <p class="description about__role">
+          (This automates printer connection for any future User logon.)
         </p>
         <p class="about__role" align="center">
-          <img src='https://github.com/jdsearcy03/Application-Installer/blob/main/ReadMe%20Files/Status.gif?raw="true"' class="image" alt="Check Installation Status">
+          <img src='https://github.com/jdsearcy03/Connect-Network-Printers/blob/main/ReadMe%20Files/Save.gif?raw="true"' class="image" alt="Check Installation Status">
         </p>
       </section>
     </main>
