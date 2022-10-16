@@ -41,6 +41,7 @@ $printer_form.AcceptButton = $Computer_button
 
 $search_accept = {
     $printer_form.AcceptButton = $Computer_button
+    $Printer_Box.ClearSelected()
 }
 $Computer_bar.add_MouseDown($search_accept)
 $printer_form.Controls.Add($Computer_bar)
@@ -138,6 +139,8 @@ $($Printer_Box.SelectedItem)", "Remove Printer", 4)
         If ($answer -eq "Yes") {
             $Printer_Box.Items.RemoveAt($($Printer_Box.Items.SelectedIndex))
         }
+    }else{
+        $Printer_Box.ClearSelected()
     }
 }
 $Printer_Box.add_Click($printer_remove)
@@ -150,8 +153,11 @@ $confirm_button.Text = 'Confirm'
 
 $confirm = {
     $ComputerName = $Computer_bar.Text
+    $ChosenPrinters = @()
+    $printscript = @()
     $ChosenPrinters = $Printer_Box.Items
-    $printscript = $printscript_header + $ChosenPrinters
+    $printscript += $printscript_header 
+    $printscript += $ChosenPrinters
     $printscript | Out-File -FilePath "$Print_Script_Path\$ComputerName.vbs"
     $answer = [System.Windows.Forms.MessageBox]::Show("Your Print Script has been saved to: $Print_Script_Path\$ComputerName.vbs
 Would you like to add the print script to the Startup Folder of $($ComputerName)?", "Print Script", 4)
@@ -161,7 +167,6 @@ Would you like to add the print script to the Startup Folder of $($ComputerName)
     [System.Windows.Forms.MessageBox]::Show("Process Complete")
     $Printer_Box.Items.Clear()
     $Computer_bar.Clear()
-    $Computer_bar.Focused = $true
     $printer_form.AcceptButton = $Computer_button
 }
 $confirm_button.add_click($confirm)
